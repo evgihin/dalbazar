@@ -1,0 +1,132 @@
+#title{
+	font-size: 32px;
+	top:30px;
+	left:300px;
+	position: absolute;
+}
+h1.title{
+	margin: 0 0 15px 0;
+}
+
+/* таблицы */
+table{
+	margin-top: 15px;
+}
+table td,table th{
+	text-align: left;
+	margin: 4px;
+	padding: 4px!important;
+	text-shadow: 0 1px 0 #FFFFFF;
+	vertical-align: top;
+	border-right: 1px white solid;
+	border-top: 1px white solid;
+}
+th{
+	background: #D0D0D0;
+	background: -moz-linear-gradient(top , #F5F5F5, #D0D0D0);
+	background: -webkit-linear-gradient(top , #F5F5F5, #D0D0D0);
+	background: -o-linear-gradient(top , #F5F5F5, #D0D0D0);
+	background: -ms-linear-gradient(top , #F5F5F5, #D0D0D0);
+	background: linear-gradient(top , #F5F5F5, #D0D0D0);
+}
+tr.even{
+	background: #B6C6D7;
+	background: -moz-linear-gradient(top , #EFEFEF, #D7D7D7);
+	background: -webkit-linear-gradient(ttop , #EFEFEF, #D7D7D7);
+	background: -o-linear-gradient(top , #EFEFEF, #D7D7D7);
+	background: -ms-linear-gradient(top , #EFEFEF, #D7D7D7);
+	background: linear-gradient(top , #EFEFEF, #D7D7D7);
+}
+tr.marked{
+	background: #999999;
+	background: -moz-linear-gradient(top , #F0F0F2, #DBE0F1);
+	background: -webkit-linear-gradient(top , #F0F0F2, #DBE0F1);
+	background: -o-linear-gradient(top , #F0F0F2, #DBE0F1);
+	background: -ms-linear-gradient(top , #F0F0F2, #DBE0F1);
+	background: linear-gradient(top , #F0F0F2, #DBE0F1);
+}
+.minCol{
+	width: 1px;
+}
+
+/* Панель иконок действий */
+#aActions{
+	position: absolute;
+	right: 0;
+	top: 166px;
+}
+
+#aActions>div{
+	float: right;
+	font-size: 12px;
+	margin-left: 3px;
+	padding: 3px;
+	text-align: center;
+	border-radius: 3px;
+}
+
+#aActions>div:hover{
+	box-shadow: 0 0 3px black;
+}
+
+#aActions .aIcon{
+	width: 32px;
+	height: 32px;
+	background-position: top left;
+	margin: 0 auto;
+}
+
+/* пользовательские формы */
+label {
+	display: inline-block;
+	width: 150px;
+	margin-bottom: 7px;
+}
+#categoryFrom,#categoryTo{
+	width: 300px;
+}
+#FACatButtons{
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+}
+.errorMessage{
+    margin-left: 150px;
+	color: #A30000;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+/* левая панель управления */
+.ALtitle{
+	background: none repeat scroll 0 0 #EEEEEE;
+    color: #212121;
+    font-size: 16px;
+    margin-bottom: 6px;
+    padding: 3px 20px 6px 0;
+    text-align: center;
+    text-shadow: 1px 1px 1px #FFFCFC;
+	border-radius: 5px 5px 0 0;
+}
+.ALcontent{
+	margin: 0 8px;
+	padding-bottom: 8px;
+}
+#loginblock{
+	display: none;
+}
+
+.mainPageBlock{
+    
+}
+.mainPageItem{
+    float: left;
+    margin: 0 10px 5px 0;
+    padding: 0 7px;
+    height: 70px;
+    vertical-align: middle;
+}
+.mainPageIcon{
+    vertical-align: middle;
+    width: 70px; height: 70px;
+}

@@ -1,0 +1,24 @@
+.rbBlock{
+    border-top: 1px solid #B0B0B0;
+    border-bottom: 1px solid #FFFFFF;
+    padding: 10px;
+}
+.rbImage{
+    text-align: center;
+    position: relative;
+    width: 120px;
+}
+.rbPrice{
+    position: absolute;
+    background: rgba(0,0,0,0.5);
+    width: 114px;
+    height: 18px;
+    bottom: 0; left: 0;
+    color: white;
+    padding: 1px 3px;
+    text-align: right;
+}
+.rbDescription{
+    text-align: center;
+    margin-top: 7px;
+}

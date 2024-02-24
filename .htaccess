@@ -1,0 +1,16 @@
+php_value upload_max_filesize 15M
+php_value post_max_size 15M
+RewriteEngine on
+
+# если директория или файл существуют, использовать их напрямую
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/images/(.*)$
+# иначе отправлять запрос на файл index.php
+RewriteRule . index.php
+
+#закрываем доступ к репозиторию
+RewriteRule \.git index.php
+
+RewriteCond %{HTTP_HOST} ^www.dalbazar.ru$
+RewriteRule ^(.*)$ http://dalbazar.ru/$1 [R=301,L]

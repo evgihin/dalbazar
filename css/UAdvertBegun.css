@@ -1,0 +1,72 @@
+/* 
+    Document   : UAdvertBegun
+    Created on : 18.04.2013, 9:05:37
+    Author     : uyras
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.abMain{
+    overflow:hidden;
+    padding: 0;
+    position: relative;
+}
+.abContainer{
+    margin: 0;
+    overflow: hidden;
+}
+.abScroll{
+    position: relative;
+    white-space: nowrap;
+}
+.abBlock{
+    display: inline-block;
+    width: 120px;
+    user-select:none;
+}
+.atImage{
+    width: 120px;
+    height: 120px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+/* стрелки */
+.abLeft,.abRight{
+    top: 0; 
+    background-color: rgba(242, 241, 241, 0.3);
+    width: 30px;
+    height: 120px;
+    position: absolute;
+    z-index: 1;
+    cursor: pointer;
+}
+.abLeft{
+    left: 0;
+}
+.abRight{
+    right: 0;
+}
+.abLeftArrow, .abRightArrow{
+    position: absolute;
+    top: 20px;
+    width: 0;
+    height: 0;
+    border-top: 40px solid transparent;
+    border-bottom: 40px solid transparent;
+}
+.abLeftArrow{border-right: 10px solid rgba(5, 117, 154, 0.80); left: 6px;}
+.abRightArrow{border-left: 10px solid rgba(5, 117, 154, 0.80); right: 6px;}
+.abLeft:hover, .abRight:hover{
+    background-color: rgba(242, 241, 241, 0.8);
+}
+
+.atDescription{
+    width: 110px; 
+    padding: 2px 5px; 
+    height: 51px;
+    overflow: hidden;
+    white-space: normal;
+}

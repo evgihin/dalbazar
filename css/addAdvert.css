@@ -1,0 +1,96 @@
+#DopPhones{
+    padding: 3px;
+    width: 145px;
+    background-color: white;
+}
+.DopPhone{
+    display: none;
+}
+.delDopPhone{
+    background: url("/images/theme/cancel.png") no-repeat top left;
+    display: inline-block;
+    width: 15px; height: 15px;
+}
+
+/* страница добавления объявлений */
+#advertForm label{
+	width: 150px;
+	display: inline-block;
+}
+.advAddSlider{
+	width: 200px;
+	display: inline-block;
+	margin-left: 15px;
+}
+.advAddField{
+	margin-bottom: 7px;
+        position: relative;
+}
+#addAdvert{margin: 10px 0;}
+div.invalid{
+	font-size: 12px;
+	color: #A30000;
+	margin-top: 2px;
+}
+#advertForm div.invalid{
+	margin-bottom: 10px;
+}
+input.invalid, textArea.invalid, select.invalid{
+	border: 1px solid #A30000;
+        padding: 2px;
+}
+input.valid, textArea.valid, select.valid{
+	border: 1px solid #0DA300;
+        padding: 2px;
+}
+
+#filelist{margin-top: 10px;}
+.advImageBlock1{
+	margin: 2px;
+	display: inline-block;
+	position: relative;
+	background-color: #D9F4FE;
+	vertical-align: top;
+}
+.advImageBlock2{
+	display: table-cell;
+	height: 130px;
+	text-align: center;
+	vertical-align: middle;
+	width: 130px;
+	cursor: pointer;
+}
+.advImageDelete{
+	background: url(../images/theme/icon-32-cancel.png) top left;
+	width: 32px; height: 32px;
+	position: absolute;
+	top: -5px; right: -5px;
+	cursor: pointer;
+}
+.advImageMain{
+	background: url(../images/theme/check.png) top left;
+	width: 15px;
+	height: 15px;
+	position: absolute;
+	bottom: 3px;
+	left: 3px;
+	display: none;
+}
+.advImageError{
+	position: absolute;
+	width: 126px;
+	padding: 2px;
+	bottom: 0; left: 0;
+	background-color: rgba(41, 41, 41, 0.4);
+	color: white;
+	display: none;
+	font-size: 10px;
+}
+
+.advAddPhoneList{
+    display: inline-block;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    width: 160px;
+}

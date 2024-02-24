@@ -1,0 +1,17 @@
+/* карточка объявления */
+#aDescription{
+    margin-left: 390px;
+}
+#aFotoBlock{
+    float: left;
+    width: 370px;
+}
+span.aParamName{
+    display: inline-block;
+    width: 170px;
+    margin-bottom: 2px;
+}
+
+.aTempPhones{
+    margin-top: 4px;
+}

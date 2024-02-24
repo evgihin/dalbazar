@@ -1,0 +1,766 @@
+html,body{
+    padding: 0;
+    margin: 0;
+    font-family: Arial;
+    font-size: 14px;
+    height: 100%;
+    color: #575757; /* основной текст */
+}
+img{vertical-align: bottom;}
+a img{border: 0;}
+a, .inactive{text-decoration: none; color: #4C6EA9;}
+a:hover{text-decoration: underline; color: #4C6EA9;}
+.inactive {border-bottom: 1px #4C6EA9 dashed; cursor: pointer;}
+.inactive:hover{color: #0B6C82; border-bottom: 1px #4C6EA9 dashed; text-decoration: none!important;}
+.onmain{color: #575656;}
+.onmain.inactive{border-bottom-color: #575656;}
+.onmain.inactive:hover{border-bottom-color: #4C6EA9;}
+
+h1{
+    font-family: arial;
+    font-size: 22px;
+    margin: 15px 0;
+}
+h2{
+    font-family: arial;
+    font-size: 20px;
+    margin: 15px 0;
+}
+h3{
+    font-family: arial;
+    font-size: 18px;
+    margin: 15px 0;
+}
+h4{
+    font-family: arial;
+    font-size: 16px;
+    margin: 15px 0;
+}
+p{
+    font-family: arial;
+    font-size: 16px;
+    margin: 15px 0;
+}
+table{
+    border:0px; /* border="0" */
+    border-collapse:collapse; /* cellspacing="0" */
+}
+table td{
+    padding:0px; /* cellpadding="0" */
+}
+
+input[type=button],input[type=submit],button, .button{
+    background: #097596; /* Old browsers */
+    background: -moz-linear-gradient(top,  #4990aa 0%, #097596 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4990aa), color-stop(100%,#097596)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #4990aa 0%,#097596 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #4990aa 0%,#097596 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #4990aa 0%,#097596 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #4990aa 0%,#097596 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4990aa', endColorstr='#097596',GradientType=0 ); /* IE6-9 */
+
+
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 3px 6px 4px;
+    border: 1px solid #056889;
+    margin-top: 15px;
+}
+a.button:hover, .button a:hover{
+    text-decoration:none;
+    color: #FFFFFF;
+}
+
+.disabled{
+    opacity: 0.4;
+    cursor: default!important;
+}
+
+.small{
+    font-size: .85em;
+}
+.very-small{
+    font-size: .7em;
+}
+
+input[type=button]:active,input[type=submit]:active{
+    background: #097596; /* Old browsers */
+    background: -moz-linear-gradient(top,  #097596 0%, #4990aa 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#097596), color-stop(100%,#4990aa)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #097596 0%,#4990aa 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #097596 0%,#4990aa 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #097596 0%,#4990aa 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #097596 0%,#4990aa 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#097596', endColorstr='#4990aa',GradientType=0 ); /* IE6-9 */
+}
+
+.clear:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.clear2{clear: both;}/*на случай если первый не работает, добавляем блок с этим стилем*/
+.right{float: right;}
+
+label{
+    width: 150px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#loader {
+    position:fixed;
+    top:0; left:0;
+    height:100%; width:100%;
+    background-color: rgba(204,204,204,0.3);
+    display: none;
+    cursor: wait;
+}
+#loader>div{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -32px 0 0 -32px;
+}
+
+
+.left {float:left !important;}
+.right {float:right !important;}
+
+.hidden {display: none;}
+.additional{
+    background-color: #F6F5F5;
+    border: 1px dashed #D6D6D6;
+    padding: 4px;
+}
+
+.floatleft{
+    float:left;
+}
+.floatright{
+    float: right;
+}
+/* таблицы */
+table.data{
+    margin-bottom: 15px;
+}
+table.data td,table.data th{
+    text-align: left;
+    margin: 4px;
+    padding: 4px!important;
+    text-shadow: 0 1px 0 #FFFFFF;
+    vertical-align: top;
+    border-right: 1px white solid;
+    border-top: 1px white solid;
+}
+table.data th{
+    background: #D0D0D0;
+    background: -moz-linear-gradient(top , #F5F5F5, #D0D0D0);
+    background: -webkit-linear-gradient(top , #F5F5F5, #D0D0D0);
+    background: -o-linear-gradient(top , #F5F5F5, #D0D0D0);
+    background: -ms-linear-gradient(top , #F5F5F5, #D0D0D0);
+    background: linear-gradient(top , #F5F5F5, #D0D0D0);
+}
+table.data tr.even{
+    background: #B6C6D7;
+    background: -moz-linear-gradient(top , #EFEFEF, #D7D7D7);
+    background: -webkit-linear-gradient(ttop , #EFEFEF, #D7D7D7);
+    background: -o-linear-gradient(top , #EFEFEF, #D7D7D7);
+    background: -ms-linear-gradient(top , #EFEFEF, #D7D7D7);
+    background: linear-gradient(top , #EFEFEF, #D7D7D7);
+}
+table.data tr.marked{
+    background: #999999;
+    background: -moz-linear-gradient(top , #F0F0F2, #DBE0F1);
+    background: -webkit-linear-gradient(top , #F0F0F2, #DBE0F1);
+    background: -o-linear-gradient(top , #F0F0F2, #DBE0F1);
+    background: -ms-linear-gradient(top , #F0F0F2, #DBE0F1);
+    background: linear-gradient(top , #F0F0F2, #DBE0F1);
+}
+
+
+.red{color: #A30000;}
+tr.red, td.red{
+    background: -moz-linear-gradient(top , #FFB5B5, #FFC1C1)!important;
+    background: -webkit-linear-gradient(ttop , #FFB5B5, #FFC1C1)!important;
+    background: -o-linear-gradient(top , #FFB5B5, #FFC1C1)!important;
+    background: -ms-linear-gradient(top , #FFB5B5, #FFC1C1)!important;
+    background: linear-gradient(top , #FFB5B5, #FFC1C1)!important;
+    background-color: #FFB5B5!important;
+    color: inherit;
+}
+.bold{font-weight: bold;}
+.row{ margin-bottom: 4px; } /*строка, обычно используется в формах*/
+.shadowed,.bordered{box-shadow: 0 0 3px #D2D2D2;} /*тень элемента*/
+.radiused,.cornered,.radiused5,.cornered5{border-radius: 5px;} /*круглые углы элемента*/
+.radiused10,.cornered10{border-radius: 10px;}
+.radiused10-bottom,.cornered10-bottom{border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;}
+.bordered{border:2px solid #B0B0B0;}
+.secondaryLabel{ color: #B1B1B1; }
+.dynamic:hover{text-decoration: none; border-bottom: dashed 1px;}/*ссылки, не приводящие к перезагрузке страницы*/
+.question{}/*вопросительный знак для всплывающих подсказок*/
+.tooltip { /*стиль всплывающей подсказки*/
+
+    background: #097596; /* Old browsers */
+    background: -moz-linear-gradient(top,  #4990aa 0%, #097596 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4990aa), color-stop(100%,#097596)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #4990aa 0%,#097596 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #4990aa 0%,#097596 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #4990aa 0%,#097596 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #4990aa 0%,#097596 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4990aa', endColorstr='#097596',GradientType=0 ); /* IE6-9 */
+
+    border-bottom: 1px dotted;
+    border-radius: 20px 20px 20px 20px;
+    color: white;
+    cursor: help;
+    font-weight: bold;
+    margin: 0 5px;
+    padding: 2px 5px;
+    position: relative;
+}
+.tooltip div {
+    display: none;
+    position: absolute;
+    bottom: -1px;
+    left: -1px;
+    z-index: 1000;
+    width: 190px;
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 12px;
+    line-height: 16px;
+    color: #000;
+    border: 1px solid #A5E5FE;
+    background: #D9F4FE;
+    font-weight: normal;
+}
+
+.note{
+
+}
+
+#main,#topmenu{
+    width: 960px;
+}
+
+#main.with_right, #topmenu.with_right{
+    width: 820px;
+    right: 70px;
+}
+
+#main{
+    position: relative;
+    margin: 0 auto;
+    z-index: 2;
+    margin-top: 33px;
+}
+
+/*верхнее меню*/
+#floatingTop{
+    z-index: 3;
+    height: 33px;
+    position: fixed;
+    left: 0; top: 0;
+    width: 100%;
+}
+#topmenu{
+    margin: 0 auto;
+    height: 100%;
+    position: relative;
+    height: 33px;
+    z-index: 3;
+    border-bottom: 1px solid #B0B0B0;
+    border-right: 1px solid #B0B0B0;
+    background: white;
+}
+#go_up{
+    cursor: pointer;
+    width: 11px; height: 33px;
+    position: absolute;
+    top: 0; left: 0;
+    background: url(/images/theme/strelka_up.jpg) top left;
+}
+
+/*правый блок рекламы*/
+#floatingRight{
+    height: 100%;
+    z-index: 1;
+    position: fixed;
+    left: 0; top: 0;
+    width: 100%;
+}
+
+#rightBegunContainer{
+    margin: 0 auto;
+    height: 100%;
+    width: 140px;
+    position: relative;
+    left: 410px; top: 0;
+    overflow: hidden;
+    border-left: 1px solid #B0B0B0;
+}
+#rightBegunContainer>div{
+    width: 200px; height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background: #DCDCDC;
+}
+#rightBegun{
+    width: 140px;
+}
+
+
+
+#header{
+    height: 135px;
+}
+#article{
+    margin: 15px 0 0;
+}
+#logo{
+    padding: 17px 24px;
+    height: 69px;
+    width: 219px;
+}
+.city{
+    position: absolute;
+    top: 70px; left: 31px;
+    z-index: 2;
+}
+#searchbar{
+    left: 281px;
+    position: absolute;
+    top: 18px;
+}
+#searchfield{
+    border: 2px solid #B0B0B0;
+    height: 46px;
+    padding: 0 53px 0 5px;
+    width: 463px;
+    font-size: 24px;
+    color: #999999
+}
+#searchbtn{
+    width: 46px;
+    height: 46px;
+    position: absolute;
+    top: 2px;
+    right: 8px;
+    font-family: Arial;
+}
+#searchbtn input{
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: none;
+    padding: 0;
+    margin: 0;
+    background: url(../images/theme/lupa2.jpg) top left;
+    cursor: pointer;
+}
+#searchbtn input:hover{
+    background: url(../images/theme/lupa2.jpg) bottom left;
+}
+.searchAdvise{
+    position: absolute;
+    top:55px;
+    left: 2px;
+}
+
+div.breadcrumbs{font-size: 16px;}
+#mainmenu{position: absolute; left: 20px; top: 7px;}
+#mainmenu ul{padding: 0; margin: 0;}
+#mainmenu ul li{list-style: none; display: inline; margin: 0 5px}
+#recentcat{position: absolute; left: 273px; top: 100px; width: 480px; text-align: center;}
+#recentcatnadpis{
+    position: absolute;
+    left: 273px;
+    top: 86px;
+    font-size: 12px;
+    width: 480px;
+    text-align: center;
+}
+/*#recentcat ul{padding: 0; margin: 0;}
+#recentcat ul li{list-style: none; display: inline; margin: 0 5px}*/
+#recentcat span{margin: 0 5px}
+#sidebar{width: 250px; float: left;}
+.withLeft{float: left; margin-left: 20px; width: 680px;}
+#lastadvert{box-shadow: 0 0 3px black; }
+#sidebar, #section{margin-top: 20px;}
+#sidebar>*{margin: 0 0 10px;}
+
+.reklama1, .reklama2 {border: 1px #e8e7e7 solid;}
+.reklama1{overflow: hidden} /* на главной в левой панели, если достаточно места */
+.reklama2{ /*блок на главной странице, отображается только когда наводишь на категорию и вападают подкатегории. внизу слева, если достаточно места */
+    position: absolute;
+    bottom: 10px;
+    left: 8px;
+    height: 60px;
+    width: 210px;
+    overflow: hidden;
+}
+
+.mp_category{
+    display: table-cell;
+    float: left;
+    vertical-align: middle;
+    width: 270px;
+}
+.mp_category img{margin-right: 15px; vertical-align: -20px;}
+
+#footer{text-align: center; background-color: #f6f5f5; border-top: #ebe9e9 1px solid; padding: 15px 20px; margin-top: 10px;}
+
+#maincatlist{list-style: none outside none; padding: 0; margin: 0;}
+#maincatlist>li{
+    background-color: #f2f1f1;
+
+    margin-bottom: 2px;
+}
+#maincatlist li{
+    text-align: left;
+    padding: 4px 20px 4px 10px;
+}
+#maincatlist .hovered{ }
+#maincatlist .mainsubcatlist{
+    display: none;
+    position: absolute;
+    top: -31px;
+    left: 240px;
+    background: rgba(255, 252, 252, 0.95);
+    padding: 6px 10px;
+    z-index: 2;
+}
+#maincatlist ul{list-style-type: none; padding: 0 10px;}
+#maincatlist .bridger{
+    position: absolute;
+    top: 0px;
+    left: -17px;
+    width:20px;
+    height:33px;
+    background: url(/images/theme/transparent_white_20_1.png) top left;
+}
+
+#maincatlist img.itemIcon{margin-right: 5px; vertical-align: -6px;}
+.columnBest,.column1,.column2,.column3{
+    float: left;
+    text-align: left;
+    width: 220px;
+}
+.column4,.column5,.column6,.column7{display: none;}
+.columnBest li{padding: 10px 0!important; font-size: 20px;}
+
+/* настройка фильтров на странице с категорией */
+#filterPanel{
+}
+.filter{padding-bottom: 10px; position: relative;}
+.filterName{
+    background:  #EEEEEE;
+    font-size: 16px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    text-align: center;
+    margin-bottom: 6px;
+    padding: 3px 20px 6px 0;
+    text-shadow: 1px 1px 1px #FFFCFC;
+    color: #212121;
+}
+.firstFilter{
+    border-radius: 5px 5px 0 0;
+}
+.filterParams{
+    margin: 0 8px;
+}
+.intSlider{
+    margin: 8px 6px 0 6px;
+}
+.filterClear{
+    position: absolute;
+    right: 5px;
+    top: 3px;
+}
+.filterClear>a{color: #A2A2A2;}
+.filterClear>a:hover{color: black; text-decoration: none;}
+
+/* Страница категории, настройка отображения списка объявлений */
+#advertList{width: 100%;}
+#advertList td{
+    vertical-align: top;
+    padding-bottom: 5px;
+}
+.advListTitle{
+    font-size: 16px;
+}
+.advListPicture{
+    text-align: center;
+    vertical-align: middle;
+    padding-right: 10px;
+}
+#submitFilter{
+    position: absolute;
+    display: none;
+    font-size: 20px;
+    background: #C8C8C8;
+    border-radius: 15px 5px 5px 15px;
+    padding: 5px 5px 5px 17px;
+    cursor: pointer;
+}
+.ALPictured{
+    background-position-x: center;
+    background-position-y: 0px;
+    height: 100px;
+}
+.ALPicturedBlock{
+    width: 100%; height: 100%;
+    position: relative;
+    background-color: rgba(20, 20, 20, 0.4);
+}
+.ALPicturedText{
+    background-color: rgba(0, 0, 0, 0.54);
+    color: white;
+    padding: 3px 10px 10px;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 0;
+}
+.ALBolded .ALPicturedText{
+    text-shadow: none!important;
+}
+.ALBolded td{
+    font-weight: bold;
+}
+
+/* Вверху страницы "прикрепленные" объявления */
+#advAttached{
+    text-align: center;
+    background-color:  #EEEEEE;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+#advAttached .atBlock{
+    display: inline-block;
+    height: 150px;
+    margin: 0 1px;
+    width: 120px;
+    position: relative;
+    vertical-align: middle;
+}
+#advAttached .atImage{
+    vertical-align: middle;
+    text-align: center;
+    height: 120px; width: 120px;
+    display: table-cell;
+    overflow: hidden;
+    background-color: #097596;
+}
+#advAttached .atText{
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 114px;
+    padding: 0 3px;
+    height: 26px;
+    text-align: left;
+    font-size: 10px;
+    vertical-align: top;
+}
+#advAttached .atPrice{
+    background-color: #EEEEEE;
+    position: absolute;
+    right: 0px; bottom: 30px;
+    padding: 3px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: rgba(3, 3, 3, 0.47);
+    color: white;
+}
+#advAttached .atComment{
+    position: relative;
+
+}
+#advAttached .atHide{
+    position: absolute;
+    right: 0px; bottom: 0;
+    color: #999999;
+    font-size: 10px;
+    cursor: pointer;
+
+}
+
+
+.addBtn{
+    float: right;
+    cursor: pointer;
+    padding: 2px 10px; 
+}
+.addBtn_plus{
+    width: 26px;
+    height: 26px;
+    background: url(/images/theme/plus.png) top left;
+    display: inline-block;
+    vertical-align: -8px;
+}
+
+/* панель пользователя вверху страницы */
+.userpanel_btn{
+    float: right;
+    cursor: pointer;
+    padding: 2px 10px;
+}
+.userpanel_cogwheel{
+    width: 26px;
+    height: 26px;
+    background: url(/images/theme/cogwheel.png) top left;
+    display: inline-block;
+    vertical-align: -8px;
+}
+#userpanel{
+    box-shadow: 0 0 3px black;
+    padding: 4px 5px;
+    position: absolute;
+    right: 1px;
+    text-align: center;
+    top: 12px;
+    width: 175px;
+    font-size: 10px;
+    background-color: white;
+}
+#userpanel>#userstatistic{
+    text-align: left;
+    padding: 5px 0;
+}
+#userpanel>a#logout{
+    position: absolute;
+    bottom: 5px; right: 5px;
+}
+#UPerror{
+    color: #A30000;
+}
+.loginform  div.invalid{
+    font-size: 10px;
+}
+
+/* панель управления объявлениями */
+table#UPButtons{
+    width: 100%;
+    margin-bottom: 5px;
+}
+table#UPButtons td{
+    text-align: center;
+    vertical-align: middle;
+    width: 33%;
+    font-size: 24px;
+}
+table#UPButtons div{
+    width: 85%;
+    box-shadow: 0 0 10px #BEBEBE;
+    border-radius: 15px;
+    padding: 6px 0;
+}
+table#UPButtons a>img{
+    vertical-align: -23px;
+    margin-right: 8px;
+}
+
+/* всплывающее окошко собственного сочинения. по идее намного легче стандартного jQuery */
+#mypopup{
+    position: fixed;
+    top:0; left:0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.75);
+    z-index: 1000;
+    display: none;
+}
+#mypopup>div#mp_text{
+    background-color: white;
+    position: fixed;
+    width:80%; height:80%;
+    overflow: auto;
+    top: 10%;
+    left: 10%;
+}
+#mp_loader{
+    vertical-align: middle;
+    text-align: center;
+    width:100%; height: 100%;
+    background: center no-repeat url(/images/theme/loader.gif);
+}
+#mp_close{
+    position: fixed;
+    top: 10%; right: 10%;
+    background-image: url(/images/theme/icon-32-cancel.png);
+    width:32px; height:32px;
+    cursor: pointer;
+    margin: -10px -10px 0 0;
+    z-index: 1001;
+}
+
+/* постраничная навигация для списка категорий,
+количество элементов на странице категории*/
+#catPagination, #catPageSize{
+    margin-bottom: 10px;
+    text-align: right;
+}
+#catPagination ul, #catPageSize ul{
+    font-size:12px;
+    border:0;
+    margin:0;
+    padding:0;
+    display:inline;
+}
+#catPagination li, #catPageSize li{display:inline;}
+#catPagination a, #catPageSize a{
+    border:solid 1px #9aafe5;
+    padding:1px 6px;
+    text-decoration:none;
+}
+#catPagination a:hover{	border:solid 1px #0e509e;}
+#catPagination .selected a, #catPageSize .selected a
+{
+    background:#097596;
+    color:#FFFFFF;
+    font-weight:bold;
+}
+#catPagination .hidden,
+#catPagination .first,
+#catPagination .last
+{	display: none; }
+
+/* выбиралка города */
+.cityChanger{
+    background: white;
+    width: 330px;
+    left: -7px;
+    padding: 5px;
+    position: relative;
+    top: -26px;
+}
+.cityChanger>a{
+    line-height: 1.5em;
+}
+.cityElem{
+    width: 165px;
+    float: left;
+}
+.cityBtnPadding{padding-bottom: 5px;}
+.cityElem1{}
+.cityElem2{font-weight: bold;}
+.cityElem3{font-weight: bold; font-size: 1.15em;}
+
+
+
+/* кнопки интерфейса */
+.btn_delete, .btn_delete_inactive{
+    display: inline-block;
+    width: 20px; height: 20px;
+    cursor: pointer;
+    vertical-align: middle;
+    background-position: top left;
+    
+}
+.btn_delete{background-image: url(/images/theme/icon-20-trash.png);}
+.btn_delete_inactive{background-image: url(/images/theme/icon-20-trash-gray.png);}

@@ -1,0 +1,12 @@
+/nbproject/
+/mydump.txt
+/site.zip
+/index-test.php
+/design.jpg
+/dalbazar.sql
+/Thumbs.db
+/.production
+/.debug
+*.log
+images/advert/*
+images/temp/*

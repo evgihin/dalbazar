@@ -1,0 +1,95 @@
+<link rel="stylesheet" href="/css/style.css">
+
+
+<div class=CardPage>
+
+<div class=header>  
+<h1 align=center> <%= doc.name %> </h1>
+</div>
+
+<div class=photo>
+<img alt="photo" src="<%=doc.avatar%>"/>
+</div>
+
+<div class=text>
+<h4 align=center>O sebe:</h4>
+<%=doc.about%>
+</div>
+
+<div class=date>
+<%= locals.dateFormat(doc.createdAt)%>
+</div>
+
+<div class=views>
+<%= doc.views%>
+
+
+
+<%locals.viewsCounter(doc._id)%>
+
+</div>
+
+<div class=Search>
+
+<form action="<%=route%>" method="post">
+<div>
+<label for="search">Search:</label>
+<input id="search" name="search" type="search"/>
+<input type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+
+
+
+
+
+<div class=cardList>
+<% doc.items.forEach(function (doc){ %>
+
+
+
+
+<div class=header>
+<a href="<%=doc._id%>"> <%= doc.name %> </a> 
+</div>
+
+<div class=photo>
+<img height=100 width=75 alt="photo" src="<%=doc.avatar%>"/>
+</div>
+
+<div class=text>
+<p align=center>O sebe:</p>
+<p align=left><%= doc.about%></p>
+</div>
+
+
+
+<% }) %>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,12 +1,21 @@
 <link rel="stylesheet" href="/css/style.css">
 <script src="http://localhost:3000/js/jquery-3.7.1.min.js"></script>
 
+<div class=Search>
+<form action="/users/list/" method="post">
+<div>
+<label for="search">Search:</label>
+<input id="search" name="search" type="search"/>
+<input type="submit" value="Submit"/>
+</div>
+</form>
+</div>
 
+<div class=cardList>
 <% doc.forEach(function (doc){ %>
 
 
 
-<div class=cardList>
 
 <div class=header>
 <a href="<%=doc._id%>"> <%= doc.name %> </a> 
@@ -29,10 +38,20 @@
 <%= doc.views%>
 </div>
 
-</div>
 
 
 <% }) %>
+
+</div>
+
+
+
+
+
+
+
+
+
 
 
 

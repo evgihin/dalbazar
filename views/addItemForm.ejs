@@ -1,26 +1,27 @@
 <link rel="stylesheet" href="/css/style.css">
 
-<form action='/users/addItem' method="post" enctype="multipart/form-data">
+<form action='/users/me/addItem' method="post" enctype="multipart/form-data">
+
 
 
 
 <div>
 <label for="name">Name:</label>
-<input type=text name=name value="<%=doc.name%>" />
+<input id="name" name="name" type="text"/>
 </div>
 
 <div>
 <label for="about">About:</label>
-<input type=about name=about value="<%=doc.about%>" />
+<input id="about" name="about" type="text"/>
 </div>
 
 <div>
-<label for=avatar> Avatar:<img height=100 width=75 alt="photo" src="<%=doc.avatar%>" /> </label>
-<input type='file' name='avatar' value="<%=doc.avatar%>"/>
+<label for="avatar">Avatar:</label>
+<input type='file' name='avatar'/>
 </div>
 
 <div>
-<input type="submit" value="update"/>
+<input type="submit" value="Add"/>
 </div>
 
 </form>

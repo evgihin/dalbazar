@@ -1,7 +1,7 @@
-<link rel="stylesheet" href="/css/style.css">
+<%- include('navigationBar') %>
+<%- include('search') %>
 
-
-<div class=CardPage>
+<div class=User>
 
 <div class=header>  
 <h1 align=center> <%= doc.name %> </h1>
@@ -17,38 +17,18 @@
 </div>
 
 <div class=date>
-<%= locals.dateFormat(doc.createdAt)%>
+date: <%= locals.dateFormat(doc.createdAt)%>
 </div>
 
 <div class=views>
-<%= doc.views%>
-
-
+views: <%= doc.views%>
 
 <%locals.viewsCounter(doc._id)%>
-
-</div>
-
-<div class=Search>
-
-<form action="<%=route%>" method="post">
-<div>
-<label for="search">Search:</label>
-<input id="search" name="search" type="search"/>
-<input type="submit" value="Submit"/>
-</div>
-</form>
 </div>
 
 
-
-
-
-<div class=cardList>
+<div class=Items>
 <% doc.items.forEach(function (doc){ %>
-
-
-
 
 <div class=header>
 <a href="<%=doc._id%>"> <%= doc.name %> </a> 
@@ -63,10 +43,14 @@
 <p align=left><%= doc.about%></p>
 </div>
 
+<div class=date>
+date: <%= locals.dateFormat(doc.createdAt)%>
+</div>
 
+<div class=views>
+views: <%= doc.views%>
 
 <% }) %>
-
 </div>
 
 

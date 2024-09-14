@@ -1,4 +1,7 @@
-<div class=Item>
+<link rel="stylesheet" href="/css/style.css">
+
+
+<div class=CardPage>
 
 <div class=header>  
 <h1 align=center> <%= doc.name %> </h1>
@@ -13,13 +16,7 @@
 <%=doc.about%>
 </div>
 
-<div class=date>
-date: <%= locals.dateFormat(doc.createdAt)%>
-</div>
 
-<div class=views>
-views: <%= doc.views%>
-</div>
 
-<%locals.itemViewsCounter(doc._id)%>
-</div>
+
+

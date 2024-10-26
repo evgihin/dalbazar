@@ -1,44 +1,13 @@
-<%- include('navigationBar') %>
-<%- include('search') %>
 
-<div>+---------------------------------USER------------------------------------+ </div>
-<div>NAME:<%= doc.name %>                                                        </div>
-<div>AVATAR:<img alt="photo" src="<%=doc.avatar%>"/>                             </div>
-<div>ABOUT:<%=doc.about%>                                                        </div>
-<div>DATE:<%= locals.dateFormat(doc.createdAt)%>                                 </div>
+<%- include('search') %>
 <div>+---------------------------------ITEMS-----------------------------------+ </div>
 <div>
 <% doc.items.forEach(function (doc){ %>
 <div>+---------------------------------ITEM------------------------------------+ </div>
-<div>NAME:<a href="<%=doc._id%>"> <%= doc.name %> </a> </div>
+<div>NAME:<a href="<%=route + doc._id%>"> <%= doc.name %> </a> </div>
 <div>PHOTO: <img height=100 width=75 alt="photo" src="<%=doc.images[0]%>"/></div>
 <div>ABOUT: <%=doc.about%>                                                            </div>
 <div>DATE: <%= locals.dateFormat(doc.createdAt)%>                                     </div>
 <div>VIEWS: <%= doc.views%>                                                           </div>
 <% }) %>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,55 +1,20 @@
 <%- include('navigationBar') %>
 <%- include('search') %>
 
-<div class=User>
-
-<div class=header>  
-<h1 align=center> <%= doc.name %> </h1>
-</div>
-
-<div class=photo>
-<img alt="photo" src="<%=doc.avatar%>"/>
-</div>
-
-<div class=text>
-<h4 align=center>O sebe:</h4>
-<%=doc.about%>
-</div>
-
-<div class=date>
-date: <%= locals.dateFormat(doc.createdAt)%>
-</div>
-
-<div class=views>
-views: <%= doc.views%>
-
-<%locals.viewsCounter(doc._id)%>
-</div>
-
-
-<div class=Items>
+<div>+---------------------------------USER------------------------------------+ </div>
+<div>NAME:<%= doc.name %>                                                        </div>
+<div>AVATAR:<img alt="photo" src="<%=doc.avatar%>"/>                             </div>
+<div>ABOUT:<%=doc.about%>                                                        </div>
+<div>DATE:<%= locals.dateFormat(doc.createdAt)%>                                 </div>
+<div>+---------------------------------ITEMS-----------------------------------+ </div>
+<div>
 <% doc.items.forEach(function (doc){ %>
-
-<div class=header>
-<a href="<%=doc._id%>"> <%= doc.name %> </a> 
-</div>
-
-<div class=photo>
-<img height=100 width=75 alt="photo" src="<%=doc.avatar%>"/>
-</div>
-
-<div class=text>
-<p align=center>O sebe:</p>
-<p align=left><%= doc.about%></p>
-</div>
-
-<div class=date>
-date: <%= locals.dateFormat(doc.createdAt)%>
-</div>
-
-<div class=views>
-views: <%= doc.views%>
-
+<div>+---------------------------------ITEM------------------------------------+ </div>
+<div>NAME:<a href="<%=locals.paths.items + doc._id%>"> <%= doc.name %> </a> </div>
+<div>PHOTO: <img height=100 width=75 alt="photo" src="<%=doc.images[0]%>"/></div>
+<div>ABOUT: <%=doc.about%>                                                            </div>
+<div>DATE: <%= locals.dateFormat(doc.createdAt)%>                                     </div>
+<div>VIEWS: <%= doc.views%>                                                           </div>
 <% }) %>
 </div>
 

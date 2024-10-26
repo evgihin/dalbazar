@@ -12,16 +12,13 @@
 </div>
 
 <div>
-<label for="images">Images:</label>
+<label for='images'>
 <% doc.images.forEach(function(img) { %>
 <img height=200 width=150 alt="photo" src="<%=img%>"/>             
-<!--<button>button</button>-->
-<button><%=img%></button>
 <%})%>
+</label>
 </div>
 
-<div>
-<label for="add">Add:</label>
 <input multiple=true type='file' name='images'/>
 </div>
 

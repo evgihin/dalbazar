@@ -1,25 +1,20 @@
-<div class=Item>
+<%- include('navigationBar') %>
 
-<div class=header>  
-<h1 align=center> <%= doc.name %> </h1>
+<div class=ItemPage>
+
+<div>ITEM: <%= doc.name %>                                                            </div>
+<div>
+PHOTO:
+<% doc.images.forEach(function(img) { %>
+<img height=200 width=150 alt="photo" src="<%=img%>"/>             
+<%})%>
+</div>
+<div>ABOUT: <%=doc.about%>                                                            </div>
+<div>DATE: <%= locals.dateFormat(doc.createdAt)%>                                     </div>
+<div>VIEWS: <%= doc.views%>                                                           </div>
+<div>USER: <a href="<%=locals.paths.users + doc.ownerId%>"> <%=doc.ownerName%></a></div>
+
+<%doc.views+=1%>
+<%doc.save()%>
 </div>
 
-<div class=photo>
-<img alt="photo" src="<%=doc.avatar%>"/>
-</div>
-
-<div class=text>
-<h4 align=center>O sebe:</h4>
-<%=doc.about%>
-</div>
-
-<div class=date>
-date: <%= locals.dateFormat(doc.createdAt)%>
-</div>
-
-<div class=views>
-views: <%= doc.views%>
-</div>
-
-<%locals.itemViewsCounter(doc._id)%>
-</div>

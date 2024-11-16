@@ -1,4 +1,4 @@
-<form action='/users/add' method="post" enctype="multipart/form-data">
+<form action="<%=locals.paths.userAdd%>" method="post" enctype="multipart/form-data">
 
 <div>
 <label for="username">Username:</label>

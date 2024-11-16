@@ -1,28 +1,27 @@
+
 <form action="<%=route%>" method="post" enctype="multipart/form-data">
 
 
 <div>
 <label for="name">Name:</label>
-<input type=text name=name value="<%=doc.name%>"/>
+<input type=text name=name value="<%=doc.name%>" />
 </div>
 
 <div>
 <label for="about">About:</label>
-<input type=about name=about value="<%=doc.about%>"/>
+<input type=about name=about value="<%=doc.about%>" />
 </div>
 
 <div>
-<label for="images">Images:</label>
+<label for='images'> 
+Images:
 <% doc.images.forEach(function(img) { %>
 <img height=200 width=150 alt="photo" src="<%=img%>"/>             
-<!--<button>button</button>-->
-<button><%=img%></button>
+<button>
+</button>
 <%})%>
-</div>
-
-<div>
-<label for="add">Add:</label>
-<input multiple=true type='file' name='images'/>
+ </label>
+<input multiple=true type='file' name='images' />
 </div>
 
 <div>

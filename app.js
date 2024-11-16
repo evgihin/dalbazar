@@ -6,7 +6,6 @@ const path = require('path')
 const cookieSession = require('cookie-session')
 const app = express();
 const {userModel, itemModel, imageModel} = require('./lib/models')
-//const {userModel, itemModel} = require('./lib/models')
 const {paths, params} = require('./lib/const')
 const {filePath} = require('./lib/func')
 const fs = require('fs')
@@ -16,14 +15,18 @@ app.use(express.urlencoded({ extended: true }), express.json());
 app.set('view engine', 'ejs')
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 app.listen(3000);
-app.use(express.static('../public'))
+//app.use(express.static(paths.local))
+app.use('/tmp/', express.static('/tmp/'))
+
 
 const storage = multer.diskStorage({
 destination: function (req, file, cb) {
-const folderName ='userId_' + req.session.userId + '/' + 'itemId_' + req.session.itemId + '/'
-//const folderName ='userId_' + req.session.userId + '/' 
+const {userId, itemId} = req.session
+if(file.fieldname == 'avatar')
+var folderName = '/userId_' + userId 
+else
+var folderName ='/userId_' + userId + '/itemId_' + itemId 
 if(!fs.existsSync(paths.local + folderName))
-//fs.mkdirSync(paths.local + folderName)
 fs.mkdirSync(paths.local + folderName, {recursive: true})
 cb(null, paths.local + folderName)
 },
@@ -45,16 +48,29 @@ return date.toLocaleDateString()
   app.locals.paths = paths
 
 /* routeri */
+
 app.get(paths.userAdd, function (req, res) {res.render('addForm')})
-app.post(paths.userAdd, upload.single('avatar'), async function (req, res) {
-const {username, password, name, about, avatar} = req.body
-const user = userModel({username: username, password: password, name: name, about: about, avatar: filePath(req.file)})
+app.post(paths.userAdd,  async function (req, res) {
+const {username, password, name, about} = req.body
+const user = userModel({username: username, password: password, name: name, about: about})
 await user.save()
-req.session.user = user
 req.session.userId = user._id.toString()
-  console.log(req.session.userId)
-  console.log(name)
-res.redirect(paths.items)
+req.session.user = user
+res.redirect(paths.avatarAdd)
+})
+
+app.get(paths.avatarAdd, function (req, res) {res.render('addAvatar')})
+app.post(paths.avatarAdd, upload.single('avatar'), async function (req, res) {
+const {avatar} = req.body
+const user = await userModel.findById(req.session.userId)
+//user.avatar = filePath(req.file)
+user.avatar = req.file.path
+await user.save()
+res.end()
+/*
+console.log('USER')
+console.log(user)
+*/
 })
 
 
@@ -70,6 +86,7 @@ res.render('userPage', {doc: doc, route: paths.users + userId})
 console.log(doc)
 }
 
+/*
 async function itemList(req, res) {
 const {search} = req.body
 if(search)
@@ -77,6 +94,18 @@ var doc = await itemModel.find({name: {$regex: search}})
 else
 var doc = await itemModel.find({})
 res.render('itemList', {doc: doc, route: req.route.path})
+  }
+  */
+async function itemList(req, res) {
+const {search} = req.body
+if(search)
+var doc = await itemModel.find({name: {$regex: search}}).populate({path: 'images'})
+else
+//var doc = await itemModel.find({})
+var doc = await itemModel.find({}).populate({path: 'images'})
+res.render('itemList', {doc: doc, route: req.route.path})
+console.log('DOC')
+console.log(doc)
   }
 
 app.get(paths.items, itemList)
@@ -91,6 +120,7 @@ res.render('itemPage', {doc: doc})
 })
 
 
+/*
 app.get(paths.profile, function (req, res){res.render('updateForm', {doc: req.session.user})})
 app.post(paths.profile, upload.single('avatar'), async function (req, res) {
 const {username, password, name, about, avatar} = req.body
@@ -105,6 +135,26 @@ await user.save()
 req.session.user = user
 res.redirect(paths.profile)
 console.log(user)
+})
+*/
+app.get(paths.profile, function (req, res){res.render('updateForm', {doc: req.session.user})})
+app.post(paths.profile, upload.single('avatar'), async function (req, res) {
+const {username, password, name, about, avatar} = req.body
+const user = await userModel.findById(req.session.userId)
+user.username = username
+user.password = password
+user.name = name
+user.about = about
+if(req.file)
+//user.avatar = filePath(req.file)
+user.avatar = req.file.path
+await user.save()
+req.session.user = user
+res.redirect(paths.profile)
+console.log('USER')
+console.log(user)
+console.log('FILE')
+console.log(req.file)
 })
 
 app.get(paths.login, function (req, res){res.render('loginForm')})
@@ -123,42 +173,12 @@ res.redirect(paths.login)
 
 app.get(paths.logout, function (req, res) {req.session = null; res.redirect(paths.items)})
 
-/*
-app.get(paths.itemAdd, function (req, res){res.render('addItemForm', {route: req.route.path})})
-app.post(paths.itemAdd, upload.array('images', 2), async function (req, res) {
-const user = await userModel.findById(req.session.userId)
-const {name, about, images} = req.body
-const item = itemModel({name: name, about: about, ownerId: user._id, ownerName: user.username})
 
-//req.session.itemId = item._id.toString()
-
-req.files.forEach(async function(img){ 
-item.images.push(filePath(img))
-})
-
-await item.save()
-
-user.items.push(item._id)
-await user.save()
-req.session.itemId = item._id.toString()
-res.redirect(paths.userItems)
-console.log('ITEM:' + item)
-})
-*/
 app.get(paths.itemAdd, function (req, res){res.render('addItemForm', {route: req.route.path})})
 app.post(paths.itemAdd, async function (req, res) {
 const user = await userModel.findById(req.session.userId)
-//const {name, about, images} = req.body
 const {name, about} = req.body
 const item = itemModel({name: name, about: about, ownerId: user._id, ownerName: user.username})
-
-//req.session.itemId = item._id.toString()
-
-/*
-req.files.forEach(async function(img){ 
-item.images.push(filePath(img))
-})
-*/
 
 await item.save()
 
@@ -166,41 +186,87 @@ user.items.push(item._id)
 await user.save()
 req.session.itemId = item._id.toString()
 res.redirect(paths.imageAdd)
-console.log('ITEM:' + item)
-console.log('ROUTE:' + req.route.path)
-console.log('NAME:' + req.body.name)
-console.log('ITEMID:' + req.session.itemId)
 })
 
+/*
 app.get(paths.imageAdd, function (req, res){res.render('addImageForm', {route: req.route.path})})
 app.post(paths.imageAdd, upload.array('images', 2), async function (req, res) {
-//app.post(paths.imageAdd, async function (req, res) {
 const item = await itemModel.findById(req.session.itemId)
 const {images} = req.body
-//const {name, about} = req.body
-//const item = itemModel({name: name, about: about, ownerId: user._id, ownerName: user.username})
-
-//req.session.itemId = item._id.toString()
-
 req.files.forEach(async function(img){ 
-item.images.push(filePath(img))
+item.images.push(filePath(img, req.session.userId, req.session.itemId))
 })
-
 await item.save()
+//res.end()
+res.redirect(paths.userItems + req.session.itemId)
+//res.redirect(paths.userItems + req.session.itemId)
+console.log('IMAGE')
+console.log(item.images[0])
 
-/*
-user.items.push(item._id)
-await user.save()
-req.session.itemId = item._id.toString()
+})
 */
-res.redirect(paths.userItems)
 /*
-console.log('ITEM:' + item)
-console.log('ITEMID:' + req.session.itemId)
+app.get(paths.imageAdd, function (req, res){res.render('addImageForm', {route: req.route.path})})
+app.post(paths.imageAdd, upload.array('images', 2), async function (req, res) {
+const item = await itemModel.findById(req.session.itemId)
+const {images} = req.body
+const links = []
+req.files.forEach(async function(img){ 
+links.push(filePath(img))
+})
+const image = await imageModel.insertMany(req.files)
+await item.save()
+links.forEach(function(link) {
+console.log('{' + 'link: ' +  link + '}' + ',')
+})
+res.end()
+console.log('IMAGES')
+console.log(item.images)
+console.log('LINK')
+console.log(links)
+console.log('FILES')
+console.log(req.files)
+console.log(image)
+})
 */
+app.get(paths.imageAdd, function (req, res){res.render('addImageForm', {route: req.route.path})})
+app.post(paths.imageAdd, upload.array('images', 2), async function (req, res) {
+const item = await itemModel.findById(req.session.itemId)
+const {images} = req.body
+/*
+const links = []
+req.files.forEach(async function(img){ 
+links.push(filePath(img))
+})
+*/
+const image = await imageModel.insertMany(req.files, {lean: true})
+image.forEach(function(image) {
+item.images.push(image._id)
+})
+await item.save()
+/*
+links.forEach(function(link) {
+console.log('{' + 'link: ' +  link + '}' + ',')
+})
+*/
+const doc = await itemModel.findById(req.session.itemId).populate({path: 'images'})
+res.end()
+console.log('IMAGES')
+console.log(item.images)
+/*
+console.log('LINK')
+console.log(links)
+console.log('FILES')
+console.log(req.files)
+*/
+console.log('IMAGE')
+console.log(image)
+console.log('ITEM')
+console.log(doc.images[0].path)
 })
 
 
+/*
 async function userItems(req, res) {
 const {search} = req.body
 const {userId} = req.session
@@ -208,13 +274,27 @@ if(search)
 var doc = await userModel.findById(userId).populate({path: 'items', match:{name: {$regex: search}}}).exec()
 else
 var doc = await userModel.findById(userId).populate('items').exec()
-//var doc = await itemModel.findById(req.session.itemId).populate('images').exec()
-//var doc = await userModel.findById(userId).populate('items').populate('images').exec()
-//var doc = await userModel.findById(userId)
-
-//console.log(doc)
+console.log('ITEMS')
 console.log(doc.items)
-console.log('ROUTE:' + req.route.path)
+res.render('userItems', {doc: doc, route: req.route.path})
+}
+app.get(paths.userItems, userItems)
+app.post(paths.userItems, userItems)
+*/
+async function userItems(req, res) {
+const {search} = req.body
+const {userId} = req.session
+if(search)
+var doc = await userModel.findById(userId).populate({path: 'items', match:{name: {$regex: search}}}).exec()
+else
+//var doc = await userModel.findById(userId).populate({path: 'items', populate: {path: 'images'}}).exec()
+var doc = await userModel.findById(userId)
+await doc.populate({path:'items', populate: {path: 'images'}})
+console.log('ITEMS')
+//console.log(doc.items[0].images[0].path)
+doc.items.forEach(function (item) {
+console.log(item.images[0].path)
+})
 res.render('userItems', {doc: doc, route: req.route.path})
 }
 app.get(paths.userItems, userItems)
@@ -227,6 +307,7 @@ req.session.item = item
 req.session.itemId = item._id.toString()
 res.render('itemForm', {doc: item, route: paths.userItems + req.params.itemId })
 })
+/*
 app.post(paths.userItems + params.itemId, upload.array('images', 2), async function (req, res) {
 const {name, about, images, ownerId, ownerName} = req.body
 const item = await itemModel.findById(req.params.itemId)
@@ -246,5 +327,39 @@ res.redirect(paths.userItems + req.params.itemId)
 console.log('PARAMS:' + req.session.itemId)
 console.log(req.params.itemId)
 console.log(req.session.itemId)
+console.log(item.images)
+})
+*/
+app.post(paths.userItems + params.itemId, upload.array('images', 2), async function (req, res) {
+const {name, about, images, ownerId, ownerName} = req.body
+const item = await itemModel.findById(req.params.itemId)
+item.name = name 
+item.about = about
+req.files.forEach(async function(img){ 
+//item.images.push(filePath(img, req.session.userId, req.session.itemId))
+item.images.push(filePath(img))
+})
+/*
+req.files.forEach(async function(img){ 
+const imagePath = filePath(img)
+console.log(img)
+item.images.push(imagePath)
+})
+*/
+item.ownerId = ownerId
+item.ownerName = ownerName
+await item.save()
+req.session.item = item
+
+res.redirect(paths.userItems + req.params.itemId)
+/*
+console.log('PARAMS:' + req.session.itemId)
+console.log(req.params.itemId)
+console.log(req.session.itemId)
+*/
+console.log('FILES')
+console.log(req.files)
+console.log('IMAGES')
+console.log(item.images)
 console.log(item.images)
 })

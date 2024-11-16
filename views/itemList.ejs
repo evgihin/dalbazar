@@ -2,14 +2,14 @@
 <%- include('search') %>
 
 <div class=itemList>
-<% doc.forEach(function (doc){ %>
+<% doc.items.forEach(function (doc){ %>
 
 <div class=header>
 ITEM: <a href="<%=doc._id%>"> <%= doc.name %> </a> 
 </div>
 
 <div class=photo>
-PHOTO: <img height=100 width=75 alt="photo" src="<%=doc.images[0]%>"/>
+PHOTO: <img height=100 width=75 alt="photo" src="<%=doc.images[0].path%>"/>
 </div>
 
 <div class=about>

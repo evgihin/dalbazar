@@ -16,8 +16,9 @@
 <label for='images'> 
 Images:
 <% doc.images.forEach(function(img) { %>
-<img height=200 width=150 alt="photo" src="<%=img%>"/>             
+<img height=200 width=150 alt="photo" src="<%=img.path%>"/>             
 <button>
+<a href="<%=locals.paths.imageRemove + img._id%>">remove</a>
 </button>
 <%})%>
  </label>

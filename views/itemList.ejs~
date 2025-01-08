@@ -2,6 +2,7 @@
 <%- include('search') %>
 
 <div class=itemList>
+<--<% doc.items.forEach(function (doc){ %>-->
 <% doc.forEach(function (doc){ %>
 
 <div class=header>

@@ -9,8 +9,5 @@
 <div>ABOUT: <%=doc.about%>                                                            </div>
 <div>DATE: <%= locals.dateFormat(doc.createdAt)%>                                     </div>
 <div>VIEWS: <%= doc.views%>                                                           </div>
-<button>
-<a href="<%=locals.paths.itemRemove + doc._id%>">remove</a>
-</button>
 <% }) %>
 </div>

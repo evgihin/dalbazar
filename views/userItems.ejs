@@ -1,16 +1,22 @@
-
+<%- include('navigationBar') %>
 <%- include('search') %>
-<div>+---------------------------------ITEMS-----------------------------------+ </div>
+
 <div>
 <% doc.items.forEach(function (doc){ %>
-<div>+---------------------------------ITEM------------------------------------+ </div>
-<div>NAME:<a href="<%=route + doc._id%>"> <%= doc.name %> </a> </div>
-<div>PHOTO: <img height=100 width=75 alt="photo" src="<%= doc.images[0].path%>"/></div>
-<div>ABOUT: <%=doc.about%>                                                            </div>
-<div>DATE: <%= locals.dateFormat(doc.createdAt)%>                                     </div>
-<div>VIEWS: <%= doc.views%>                                                           </div>
+
+<div>Название: <%= doc.name %></div>
+<div>Изображение:<img height=100 width=75 alt="photo" src="<%= doc.images[0].path%>"/></div>
+
+<div>Цена: <%= doc.price %></div>                                             
+
+
+
 <button>
-<a href="<%=locals.paths.itemRemove + doc._id%>">remove</a>
+<a href="<%=locals.paths.itemRemove + doc._id%>">удалить</a>
+</button>
+
+<button>
+<a href="<%=route + doc._id%>">редактировать</a> 
 </button>
 <% }) %>
 </div>

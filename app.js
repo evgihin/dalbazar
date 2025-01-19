@@ -17,7 +17,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 //app.listen(3000);
 app.listen(paths.port);
 //app.use(express.static(paths.local))
-app.use('/tmp/', express.static('/tmp/'))
+//app.use('/tmp/', express.static('/tmp/'))
+//app.use('media/', express.static('media/'))
+app.use(paths.local, express.static(paths.local))
 
 
 const storage = multer.diskStorage({
@@ -52,8 +54,10 @@ return date.toLocaleDateString()
 
 app.get(paths.userAdd, function (req, res) {res.render('addForm')})
 app.post(paths.userAdd,  async function (req, res) {
-const {username, password, name, about} = req.body
-const user = userModel({username: username, password: password, name: name, about: about})
+//const {username, password, name, about} = req.body
+const {username, password, tel, email} = req.body
+//const user = userModel({username: username, password: password, name: name, about: about})
+const user = userModel({username: username, password: password, tel: tel, email: email})
 await user.save()
 req.session.userId = user._id.toString()
 req.session.user = user
@@ -97,19 +101,39 @@ var doc = await itemModel.find({name: {$regex: search}}).populate({path: 'images
 else
 var doc = await itemModel.find({}).populate({path: 'images'})
 res.render('itemList', {doc: doc, route: req.route.path})
+//res.redirect(paths.items)
 console.log('DOC')
 console.log(doc)
   }
+/*
+async function itemList(req, res) {
+const {search} = req.body
+var doc = await itemModel.find({tag: req.params.tag}).populate({path: 'images'})
+res.render('itemList', {doc: doc, route: req.route.path})
+console.log('DOC')
+console.log(doc)
+  }
+  */
 
-app.get(paths.items, itemList)
-app.post(paths.items, itemList)
+
+//app.get(paths.items , itemList)
+//app.post(paths.items, itemList)
+//app.all(paths.items, itemList)
+app.all(paths.items, itemList)
+app.all(paths.items + params.tag, itemList)
 
 app.get(paths.users + params.userId, userPage)
 app.post(paths.users + params.userId, userPage)
 
 app.get(paths.items + params.itemId, async function (req, res) {
-const doc = await itemModel.findById(req.params.itemId) 
+const {itemId} = req.params
+//app.get('/items/list/:itemId', async function (req, res) {
+const doc = await itemModel.findById(itemId).populate({path: 'images'}) 
+console.log(doc)
 res.render('itemPage', {doc: doc})
+//console.log(itemId)
+//console.log(doc.ownerId)
+//console.log(doc.ownerName)
 })
 
 
@@ -170,15 +194,18 @@ app.get(paths.logout, function (req, res) {req.session = null; res.redirect(path
 app.get(paths.itemAdd, function (req, res){res.render('addItemForm', {route: req.route.path})})
 app.post(paths.itemAdd, async function (req, res) {
 const user = await userModel.findById(req.session.userId)
-const {name, about} = req.body
-const item = itemModel({name: name, about: about, ownerId: user._id, ownerName: user.username})
+//const {name, about} = req.body
+const {name, about, price, tel, email, tag} = req.body
+//const item = itemModel({name: name, about: about, ownerId: user._id, ownerName: user.username, price: price, tel: tel, email: email})
 
+const item = itemModel({name: name, about: about, ownerId: req.session.userId, ownerName: user.username, price: price, tel: tel, email: email, tag: tag})
 await item.save()
 
 user.items.push(item._id)
 await user.save()
 req.session.itemId = item._id.toString()
 res.redirect(paths.imageAdd)
+console.log(item)
 })
 
 
@@ -188,13 +215,19 @@ app.post(paths.imageAdd, upload.array('images', 2), async function (req, res) {
 const item = await itemModel.findById(req.session.itemId)
 const {images} = req.body
 
+//const image = await imageModel.insertMany(req.files)
+const image = imageModel({})
+await image.save()
+if(req.files) {
 const image = await imageModel.insertMany(req.files)
 
-await item.save()
+//await item.save()
 
 image.forEach(function(image) {
 item.images.push(image._id)
 })
+}
+item.images.push(image._id)
 await item.save()
 
 const doc = await itemModel.findById(req.session.itemId).populate({path: 'images'})
@@ -236,10 +269,14 @@ res.render('itemForm', {doc: item, route: paths.userItems + req.params.itemId })
 })
 
 app.post(paths.userItems + params.itemId, upload.array('images', 2), async function (req, res) {
-const {name, about, images} = req.body
+//const {name, about, images} = req.body
+const {name, about, images, price, tel, email} = req.body
 const item = await itemModel.findById(req.params.itemId)
 item.name = name 
 item.about = about
+item.price = price
+item.tel = tel
+item.email = email
 const image = await imageModel.insertMany(req.files)
 
 image.forEach(function(image) {
@@ -264,3 +301,25 @@ const doc = await itemModel.deleteOne({_id: req.params.itemId})
 res.redirect(paths.userItems)
 console.log(doc)
 })
+/*
+app.get(paths.home + params.tag, async function(req, res){
+
+var doc = await itemModel.find({tag: req.params.tag}).populate({path: 'images'})
+res.render('home', {doc: doc, route: req.route.path})
+})
+*/
+app.all(paths.home, async function(req, res, next){
+
+var doc = await itemModel.find({}).populate({path: 'images'})
+res.render('home', {doc: doc, route: req.route.path})
+next()
+},itemList)
+
+/*
+app.all(paths.items + params.tag , async function(req, res){
+
+//var doc = await itemModel.find({tag: req.params.tag}).populate({path: 'images'})
+console.log(req.params.tag)
+//res.render('itemList', {doc: doc, route: req.route.path})
+})
+*/

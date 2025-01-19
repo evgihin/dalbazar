@@ -2,19 +2,20 @@
 
 <div class=ItemPage>
 
-<div>ITEM: <%= doc.name %>                                                            </div>
+<div>Название: <%= doc.name %>                                                            </div>
 <div>
-PHOTO:
+Изображения:
 <% doc.images.forEach(function(img) { %>
-<img height=200 width=150 alt="photo" src="<%=img%>"/>             
+<img height=200 width=150 alt="photo" src="<%=img.path%>"/>             
 <%})%>
 </div>
-<div>ABOUT: <%=doc.about%>                                                            </div>
-<div>DATE: <%= locals.dateFormat(doc.createdAt)%>                                     </div>
-<div>VIEWS: <%= doc.views%>                                                           </div>
-<div>USER: <a href="<%=locals.paths.users + doc.ownerId%>"> <%=doc.ownerName%></a></div>
+<div>Описание: <%=doc.about%>                                                            </div>
 
-<%doc.views+=1%>
-<%doc.save()%>
+<div>Цена: <%=doc.price%> </div>
+<div>Телефон: <%=doc.tel%></div>
+<div>Почта: <%=doc.email%></div>
+
+<div>Пользователь: <a href="<%=locals.paths.users + doc.ownerId %>"</a><%=doc.ownerName%></div>
+
 </div>
 

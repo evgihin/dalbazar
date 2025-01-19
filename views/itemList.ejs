@@ -1,31 +1,29 @@
 <%- include('navigationBar') %>
 <%- include('search') %>
 
+
+
 <div class=itemList>
 <% doc.forEach(function (doc){ %>
 
 <div class=header>
-ITEM: <a href="<%=doc._id%>"> <%= doc.name %> </a> 
+Название: <a href="<%=doc._id%>"> <%= doc.name %> </a> 
 </div>
 
 <div class=photo>
-PHOTO: <img height=100 width=75 alt="photo" src="<%=doc.images[0].path%>"/>
+Изображение: <img height=100 width=75 alt="photo" src="<%=doc.images[0].path%>"/>
 </div>
 
 <div class=about>
-ABOUT: <%= doc.about%>
+Описание: <%= doc.about%>
 </div>
 
-<div class=date>
-DATE: <%=locals.dateFormat(doc.createdAt)%>
-</div>
 
-<div class=views>
-VIEWS: <%= doc.views%>
-</div>
+
+
 
 <div class=user>
-USER: <a href="<%=locals.paths.users + doc.ownerId%>"> <%=doc.ownerName%></a>
+Пользователь: <a href="<%=locals.paths.users + doc.ownerId%>"> <%=doc.ownerName%></a>
 </div>
 
 

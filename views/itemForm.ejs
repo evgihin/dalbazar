@@ -1,20 +1,20 @@
-
+<%- include('navigationBar') %>
 <form action="<%=route%>" method="post" enctype="multipart/form-data">
 
 
 <div>
-<label for="name">Name:</label>
+<label for="name">Название:</label>
 <input type=text name=name value="<%=doc.name%>" />
 </div>
 
 <div>
-<label for="about">About:</label>
+<label for="about">Описание:</label>
 <input type=about name=about value="<%=doc.about%>" />
 </div>
 
 <div>
 <label for='images'> 
-Images:
+Изображения:
 <% doc.images.forEach(function(img) { %>
 <img height=200 width=150 alt="photo" src="<%=img.path%>"/>             
 <button>
@@ -26,7 +26,24 @@ Images:
 </div>
 
 <div>
-<input type="submit" value="update"/>
+<label for="price">Цена:</label>
+<input type=text name=price value="<%=doc.price%>" />
+</div>
+
+<div>
+<label for="tel">Телефон:</label>
+<input type=text name=tel value="<%=doc.tel%>" />
+</div>
+<div>
+<label for="email">Почта:</label>
+<input type=text name=email value="<%=doc.email%>" />
+</div>
+<div>
+<label for="tag">Раздел:</label>
+<input type=text name=tag value="<%=doc.tag%>" />
+</div>
+<div>
+<input type="submit" value="Редактировать"/>
 </div>
 
 </form>

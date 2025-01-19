@@ -1,34 +1,37 @@
-
+<%- include('navigationBar') %>
 <form action="<%=locals.paths.profile%>" method="post" enctype="multipart/form-data">
 
 <div>
-<label for="username">Username:</label>
+<label for="username">Логин:</label>
 <input type=text name=username value="<%=doc.username%>" />
 </div>
 
 <div>
-<label for="password">Password:</label>
+<label for="password">Пароль:</label>
 <input type=text name=password value="<%=doc.password%>" />
 </div>
 
 <div>
-<label for="name">Name:</label>
-<input type=text name=name value="<%=doc.name%>" />
+<label for="tel">Телефон:</label>
+<input type=text name=tel value="<%=doc.tel%>" />
 </div>
 
 <div>
-<label for="about">About:</label>
-<input type=about name=about value="<%=doc.about%>" />
+<label for="email">Почта:</label>
+<input type=text name=email value="<%=doc.email%>" />
 </div>
 
 <div>
-<label for=avatar> Avatar:<img height=100 width=75 alt="photo" src="<%=doc.avatar%>" /> </label>
+<label for=avatar>Аватар:<img height=100 width=75 alt="photo" src="<%=doc.avatar%>" /> </label>
 <input type='file' name='avatar' />
 </div>
 
 <div>
-<input type="submit" value="update"/>
+<input type="submit" value="Редактировать"/>
 </div>
+
+<a href="http://localhost:3000/users/me/items/"> Объявления </a>
+
 
 </form>
 

@@ -13,12 +13,10 @@ const fs = require('fs')
 /*Configuracii*/
 app.use(express.urlencoded({ extended: true }), express.json());
 app.set('view engine', 'ejs')
-mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
-//app.listen(3000);
+
+//mongoose.connect('mongodb://127.0.0.2:27017/mestodb');
+mongoose.connect('mongodb://127.0.0.2:27017/dalbazar');
 app.listen(paths.port);
-//app.use(express.static(paths.local))
-//app.use('/tmp/', express.static('/tmp/'))
-//app.use('media/', express.static('media/'))
 app.use(paths.local, express.static(paths.local))
 
 

@@ -24,11 +24,21 @@
 <label for="email">Почта:</label>
 <input id="email" name="email" type="text"/>
 </div>
+
+<fieldset>
+<legend>Выберите категорию:</legend>
 <div>
-<label for="tag">Раздел:</label>
-<input id="tag" name="tag" type="text"/>
+<input type=radio id="all" name=tag value="all" checked/>
+<label for="all">Общая</label>
 </div>
 <div>
+<input type=radio id="auto" name=tag value="auto" />
+<label for="auto">Авто</label>
+</div>
+</fieldset>
+
+<div>
+
 <input type="submit" value="Добавить"/>
 </div>
 

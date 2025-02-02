@@ -48,6 +48,7 @@ return date.toLocaleDateString()
 }
   app.locals.paths = paths
 
+
 /* routeri */
 
 app.get(paths.userAdd, function (req, res) {res.render('addForm')})
@@ -99,26 +100,33 @@ var doc = await itemModel.find({name: {$regex: search}}).populate({path: 'images
 else
 var doc = await itemModel.find({}).populate({path: 'images'})
 res.render('itemList', {doc: doc, route: req.route.path})
-//res.redirect(paths.items)
+
 console.log('DOC')
 console.log(doc)
   }
-/*
-async function itemList(req, res) {
+
+async function tagList(req, res) {
 const {search} = req.body
+if(search)
+var doc = await itemModel.find({tag: req.params.tag, name: {$regex: search}}).populate({path: 'images'})
+else
 var doc = await itemModel.find({tag: req.params.tag}).populate({path: 'images'})
-res.render('itemList', {doc: doc, route: req.route.path})
+//if(search)
+//doc = await doc.find({name: {$regex: search}})
+res.render('itemList', {doc: doc, route: '/' + req.params.tag + '/'})
+
 console.log('DOC')
 console.log(doc)
+
   }
-  */
+  
 
 
 //app.get(paths.items , itemList)
 //app.post(paths.items, itemList)
 //app.all(paths.items, itemList)
-app.all(paths.items, itemList)
-app.all(paths.items + params.tag, itemList)
+//app.all(paths.items, itemList)
+app.all('/' + params.tag, tagList)
 
 app.get(paths.users + params.userId, userPage)
 app.post(paths.users + params.userId, userPage)

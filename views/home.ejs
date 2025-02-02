@@ -1,14 +1,8 @@
 <%- include('navigationBar') %>
 
-Разделы:
-<a href="<%=locals.paths.items%>">Все</a>
-<% doc.forEach(function (doc){ %>
-<a href="<%=locals.paths.items + doc.tag%>"> <%=doc.tag%> 
+Категория:
+<a href="<%=locals.paths.all%>">Общая</a>
+<a href="<%=locals.paths.auto%>">Авто</a>
 
-
-
-
-
-<% }) %>
 
 

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.popup {
+position: relative;
+display: inline-block;
+cursor: pointer;
+}
+.popup .popuptext {
+visibility: hidden;
+position: absolute;
+}
+.popup .show {
+visibility: visible;
+}
+</style>
+</head>
+
+<body>
+<div class=navigationBar>
+<a href="/"> Главная </a>
+<a href="profile/"> Профиль </a>
+<a href="profile/item/add/"> Добавить </a>
+<a href="login/"> Вход </a>
+<a href="logout/"> Выход </a>
+<a href="add/"> Регистрация </a>
+</div>
+
+<button class=popup onclick=myfunction() >
+Категория
+ <span class=popuptext id=mypopup>
+<ul>
+<li><a href="all/">Общая</a></li>
+<li><p><a href="auto/">Авто</a></li>
+</ul>
+</span>
+</button>
+<script>
+function myfunction() {
+var popup = document.getElementById('mypopup')
+popup.classList.toggle('show')
+}
+</script>
+
+
+<div>
+</body>
+</html>

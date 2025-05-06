@@ -126,7 +126,7 @@ console.log(doc)
 //app.post(paths.items, itemList)
 //app.all(paths.items, itemList)
 //app.all(paths.items, itemList)
-app.all('/' + params.tag, tagList)
+//app.all('/' + params.tag, tagList)
 
 app.get(paths.users + params.userId, userPage)
 app.post(paths.users + params.userId, userPage)
@@ -180,21 +180,27 @@ console.log('FILE')
 console.log(req.file)
 })
 
-app.get(paths.login, function (req, res){res.render('loginForm')})
+//app.get(paths.login, function (req, res){res.render('loginForm')})
+app.get(paths.login, function (req, res){res.sendFile('loginForm.html', {root: './'})})
 app.post(paths.login, async  function (req, res) {
 const {username, password} = req.body
 const user = await userModel.findOne({username: username, password: password})
 if(user){
+  console.log('USER')
 req.session.user = user
 req.session.userId = user._id.toString()
-res.redirect(paths.items)
+//res.redirect(paths.items)
+res.redirect(paths.home)
 }
 else
 res.redirect(paths.login)
   console.log(user)
+  console.log('USER')
+  console.log(user)
   })
 
-app.get(paths.logout, function (req, res) {req.session = null; res.redirect(paths.items)})
+//app.get(paths.logout, function (req, res) {req.session = null; res.redirect(paths.items)})
+app.get(paths.logout, function (req, res) {req.session = null; res.redirect(paths.home)})
 
 
 app.get(paths.itemAdd, function (req, res){res.render('addItemForm', {route: req.route.path})})
@@ -314,12 +320,14 @@ var doc = await itemModel.find({tag: req.params.tag}).populate({path: 'images'})
 res.render('home', {doc: doc, route: req.route.path})
 })
 */
+/*
 app.all(paths.home, async function(req, res, next){
 
 var doc = await itemModel.find({}).populate({path: 'images'})
-res.render('home', {doc: doc, route: req.route.path})
+res.sendFile('home.html', {root: './'})
 next()
 },itemList)
+*/
 
 /*
 app.all(paths.items + params.tag , async function(req, res){
@@ -329,3 +337,6 @@ console.log(req.params.tag)
 //res.render('itemList', {doc: doc, route: req.route.path})
 })
 */
+app.get(paths.home, async function(req, res){
+res.sendFile('home.html', {root: './'})
+})

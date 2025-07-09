@@ -2,18 +2,26 @@
 <html>
 <head>
 <style>
-.popup {
-position: relative;
-display: inline-block;
-cursor: pointer;
+.button {
 }
-.popup .popuptext {
+.button .block{
+display: flex;
+height: 100%;
+position: fixed;
 visibility: hidden;
-position: absolute;
 }
-.popup .show {
+.button .show {
 visibility: visible;
 }
+.button .items {
+display: flex;
+flex-direction: column;
+}
+.button .colors{
+display: flex;
+flex-direction: column;
+}
+
 </style>
 </head>
 
@@ -27,20 +35,52 @@ visibility: visible;
 <a href="add/"> Регистрация </a>
 </div>
 
-<button class=popup onclick=myfunction() >
-Категория
- <span class=popuptext id=mypopup>
-<ul>
-<li><a href="all/">Общая</a></li>
-<li><p><a href="auto/">Авто</a></li>
-</ul>
-</span>
+
+<button class="button"  >
+Цвета
+ <div class="button block" id=block> 
+ <div id=colors class="colors ">
+<a id=red href="red/">красный</a>
+<a id=green href="green/">зеленый</a>
+<a id=blue href="blue/">синий</a>
+</div>
+<div id=items class="items">
+<a id=currentRed href='solnce/'>SOLNCE</a>
+</div>
+</div>
 </button>
 <script>
-function myfunction() {
-var popup = document.getElementById('mypopup')
-popup.classList.toggle('show')
+const id = 'newRed'
+const link = 'solnce/'
+const text = 'solnce'
+function addNewElement() {
+const childNode = document.getElementById('currentRed')
+const parentNode = childNode.parentNode
+var newElement = document.createElement('a')
+newElement.setAttribute('href', link)
+newElement.setAttribute('id', id)
+newElement.textContent = text
+console.log(newElement)
+console.log(childNode)
+console.log(parentNode)
+parentNode.insertBefore(newElement, childNode)
 }
+window.addEventListener('load', addNewElement)
+const btn = document.querySelector('button')
+const cls = document.getElementById('colors')
+const items = document.getElementById('items')
+const block = document.getElementById('block')
+function toggleItems() { 
+items.classList.toggle('show')
+}
+function toggleBlock() {
+colors.classList.toggle('show')
+}
+function listItems() {
+}
+btn.addEventListener('click', toggleBlock)
+cls.addEventListener('mouseover', toggleItems)
+
 </script>
 
 
